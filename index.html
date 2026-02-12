@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tournament Manager 🏆</title>
+    
+    <style>
+      @font-face {
+        font-family: 'GoogleSansCustom';
+        src: url('/fonts/GoogleSans_17pt-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* RIMOZIONE FRECCETTE INPUT NUMERICO */
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+
+      .btn-hover {
+        transition: all 0.3s ease !important;
+      }
+      .btn-hover:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.2);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
