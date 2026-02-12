@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import BracketPage from './pages/BracketPage.jsx';
 import Modal from './components/Modal.jsx';
+import MainLayout from './layouts/MainLayout.jsx';
 
 function App() {
   // --- STATI DELL'APPLICAZIONE ---
@@ -156,7 +157,7 @@ function App() {
   }
 
   return (
-    <div style={backgroundStyle}>
+    <MainLayout backgroundStyle={backgroundStyle}>
       
       <Modal
         modal={modal}
@@ -199,7 +200,7 @@ function App() {
           openScoreModal={openScoreModal}
         />
       )}
-    </div>
+    </MainLayout>
   )
 }
 
