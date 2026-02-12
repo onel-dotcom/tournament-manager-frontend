@@ -4,7 +4,8 @@ import HomePage from './pages/HomePage.jsx';
 import BracketPage from './pages/BracketPage.jsx';
 import Modal from './components/Modal.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
-import { API_BASE_URL } from './lib/api.js';
+import { getTeams, createTeam, deleteTeam } from './lib/teamsApi.js';
+import { getHistory, getBracket, createTournament, updateScore } from './lib/tournamentsApi.js';
 
 function App() {
   // --- STATI DELL'APPLICAZIONE ---
@@ -54,20 +55,20 @@ function App() {
 
   const fetchTeams = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/teams/read.php`)
-      setTeams(await res.json())
+      const data = await getTeams();
+      setTeams(data);
     } catch (e) { console.error(e) }
   }
   const fetchHistory = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/tournaments/read_history.php`)
-      setHistory(await res.json())
+      const data = await getHistory();
+      setHistory(data);
     } catch (e) { console.error(e) }
   }
   const fetchBracket = async (id) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/tournaments/read_bracket.php?id=${id}`)
-      setMatches(await res.json())
+      const data = await getBracket(id);
+      setMatches(data);
     } catch (e) { console.error(e) }
   }
 
@@ -76,11 +77,7 @@ function App() {
   const handleAddTeam = async (e) => {
     e.preventDefault()
     if (!newTeamName) return
-    await fetch(`${API_BASE_URL}/teams/create.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: newTeamName })
-    })
+    await createTeam(newTeamName)
     setNewTeamName(''); fetchTeams();
   }
 
@@ -96,11 +93,7 @@ function App() {
   }
 
   const confirmDelete = async (id) => {
-    const res = await fetch(`${API_BASE_URL}/teams/delete.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id })
-    })
+    const res = await deleteTeam(id)
     const result = await res.json()
     if(res.ok) { 
       fetchTeams(); setModal({ show: false });
@@ -114,12 +107,7 @@ function App() {
       setModal({ show: true, type: 'alert', title: 'Configurazione', message: 'Seleziona esattamente 8 squadre!' });
       return;
     }
-    const res = await fetch(`${API_BASE_URL}/tournaments/create.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: tournamentName || "Torneo Pro", teams: selectedTeams })
-    })
-    const result = await res.json()
+    const result = await createTournament(tournamentName || "Torneo Pro", selectedTeams)
     if(result.id) { setActiveTournamentId(result.id); fetchBracket(result.id); }
   }
 
@@ -141,15 +129,11 @@ function App() {
       setModal({ ...modal, type: 'alert', title: 'Punteggio Errato', message: 'Il pareggio non è ammesso!' });
       return;
     }
-    await fetch(`${API_BASE_URL}/tournaments/update_score.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        match_id: match.id, tournament_id: activeTournamentId,
-        score1: val1, score2: val2, 
-        team1_id: match.team1_id, team2_id: match.team2_id,
-        next_match_id: match.next_match_id 
-      })
+    await updateScore({ 
+      match_id: match.id, tournament_id: activeTournamentId,
+      score1: val1, score2: val2, 
+      team1_id: match.team1_id, team2_id: match.team2_id,
+      next_match_id: match.next_match_id 
     })
     setModal({ show: false });
     fetchBracket(activeTournamentId); fetchHistory();
