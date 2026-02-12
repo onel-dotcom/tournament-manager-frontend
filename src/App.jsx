@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.jsx';
 import BracketPage from './pages/BracketPage.jsx';
 import Modal from './components/Modal.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
+import { API_BASE_URL } from './lib/api.js';
 
 function App() {
   // --- STATI DELL'APPLICAZIONE ---
@@ -26,8 +27,6 @@ function App() {
   })
 
   const [scoreInput, setScoreInput] = useState({ s1: '', s2: '' })
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const mainFont = "'GoogleSansCustom', sans-serif";
 
   // --- LOGICA SFONDO DINAMICO ---
