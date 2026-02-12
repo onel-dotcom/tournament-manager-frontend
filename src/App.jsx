@@ -261,7 +261,7 @@ function App() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
             <button 
               onClick={() => {setActiveTournamentId(null); fetchHistory();}} 
-              style={{ cursor: 'pointer', padding: '6px 15px', borderRadius: '15px', border: '1px solid #999', background: 'white', fontSize: '0.75rem' }}
+              style={{ cursor: 'pointer', padding: '8px 20px', borderRadius: '18px', border: '1px solid #999', background: 'white', fontSize: '0.8rem', fontWeight: '500' }}
             >
               ← Indietro
             </button>
