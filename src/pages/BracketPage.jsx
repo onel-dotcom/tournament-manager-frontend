@@ -1,14 +1,18 @@
+import Button from '../components/Button.jsx';
+import Card from '../components/Card.jsx';
+
 function BracketPage({ tournamentName, matches, onBack, openScoreModal }) {
   return (
-    <div style={{ width: '95%', maxWidth: '900px', backgroundColor: 'rgba(255, 255, 255, 0.45)', padding: '16px 18px 12px', borderRadius: '25px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(15px)', border: '1px solid rgba(255, 255, 255, 0.3)', color: '#000', margin: '10px 0' }}>
+    <Card style={{ maxWidth: '900px', padding: '16px 18px 12px', margin: '10px 0' }}>
       
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <button 
+        <Button 
           onClick={onBack}
-          style={{ cursor: 'pointer', padding: '8px 20px', borderRadius: '18px', border: '1px solid #999', background: 'white', fontSize: '0.8rem', fontWeight: '500' }}
+          variant="outline"
+          style={{ padding: '8px 20px', borderRadius: '18px', fontSize: '0.8rem', fontWeight: '500' }}
         >
           ← Indietro
-        </button>
+        </Button>
         <div style={{ textAlign: 'center', flex: 1 }}>
           <img src="/images/logo.png" alt="Logo" style={{ width: '140px', mixBlendMode: 'multiply' }} />
         </div>
@@ -24,7 +28,7 @@ function BracketPage({ tournamentName, matches, onBack, openScoreModal }) {
               <p style={{fontWeight: 'bold', marginBottom: '8px'}}>{m.team1_name} vs {m.team2_name}</p>
               {m.winner_id
                 ? <span style={{ color: '#2f855a', fontWeight: '900', fontSize: '1.1rem' }}>{m.score1} - {m.score2}</span>
-                : <button onClick={() => openScoreModal(m)} style={{fontSize: '10px', padding: '6px 15px', borderRadius: '20px', cursor:'pointer', border: '1px solid #1a365d', background: '#fff', fontWeight: 'bold'}}>RISULTATO</button>}
+                : <Button onClick={() => openScoreModal(m)} variant="outline" style={{fontSize: '10px', padding: '6px 15px', borderRadius: '20px'}}>RISULTATO</Button>}
             </div>
           ))}
         </div>
@@ -35,7 +39,7 @@ function BracketPage({ tournamentName, matches, onBack, openScoreModal }) {
             <div key={m.id} style={{ padding: '14px', marginBottom: '14px', borderRadius: '15px', background: 'rgba(255,255,255,0.6)', textAlign: 'center', border: '1px solid rgba(255,255,255,0.4)' }}>
               <p style={{fontWeight: 'bold', marginBottom: '6px', fontSize: '1.05rem'}}>{m.team1_name || '??'} vs {m.team2_name || '??'}</p>
               {m.team1_id && m.team2_id && !m.winner_id && (
-                <button onClick={() => openScoreModal(m)} style={{fontSize: '10px', padding: '8px 20px', borderRadius: '20px', cursor:'pointer', border: '1px solid #1a365d', background: '#fff', fontWeight: 'bold'}}>RISULTATO</button>
+                <Button onClick={() => openScoreModal(m)} variant="outline" style={{fontSize: '10px', padding: '8px 20px', borderRadius: '20px'}}>RISULTATO</Button>
               )}
               {m.winner_id && <span style={{ color: '#2f855a', fontWeight: '900', fontSize: '1.2rem' }}>{m.score1} - {m.score2}</span>}
             </div>
@@ -48,9 +52,9 @@ function BracketPage({ tournamentName, matches, onBack, openScoreModal }) {
             <div key={m.id} style={{ padding: '28px', borderRadius: '30px', background: 'rgba(43, 108, 176, 0.1)', textAlign: 'center', border: '3px solid rgba(43, 108, 176, 0.4)', boxShadow: '0 10px 30px rgba(43,108,176,0.2)' }}>
               <h3 style={{ fontSize: '1.3rem', marginBottom: '14px' }}>{m.team1_name || '???'} <br/> vs <br/> {m.team2_name || '???'}</h3>
               {m.team1_id && m.team2_id && !m.winner_id && (
-                <button onClick={() => openScoreModal(m)} style={{ background: '#2b6cb0', color: 'white', padding: '15px 35px', border: 'none', borderRadius: '40px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}>
+                <Button onClick={() => openScoreModal(m)} variant="primary" style={{ padding: '15px 35px', borderRadius: '40px', fontSize: '1rem' }}>
                   GIOCA FINALE
-                </button>
+                </Button>
               )}
               {m.winner_id && (
                 <div style={{ marginTop: '10px' }}>
@@ -65,7 +69,7 @@ function BracketPage({ tournamentName, matches, onBack, openScoreModal }) {
           ))}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 

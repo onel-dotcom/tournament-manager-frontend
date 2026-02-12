@@ -1,3 +1,6 @@
+import Button from '../components/Button.jsx';
+import Card from '../components/Card.jsx';
+
 function HomePage({
   mainFont,
   teams,
@@ -13,7 +16,7 @@ function HomePage({
   openDeleteModal
 }) {
   return (
-    <div style={{ width: '95%', maxWidth: '850px', backgroundColor: 'rgba(255, 255, 255, 0.45)', padding: '25px', borderRadius: '25px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(15px)', border: '1px solid rgba(255, 255, 255, 0.3)', color: '#000', margin: '40px 0' }}>
+    <Card style={{ maxWidth: '850px', margin: '40px 0' }}>
       
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <img src="/images/logo.png" alt="Logo" style={{ width: '130px', mixBlendMode: 'multiply' }} />
@@ -29,13 +32,12 @@ function HomePage({
             onChange={(e) => setNewTeamName(e.target.value)}
             style={{ flex: 1, padding: '10px', borderRadius: '20px', border: '1px solid rgba(0,0,0,0.1)', paddingLeft: '15px' }}
           />
-          <button
+          <Button
             type="submit"
-            className="btn-hover"
-            style={{ padding: '8px 20px', backgroundColor: '#1a365d', color: 'white', border: 'none', borderRadius: '20px', cursor: 'pointer', fontSize: '0.8rem', fontFamily: mainFont }}
+            style={{ padding: '8px 20px', borderRadius: '20px', fontSize: '0.8rem', fontFamily: mainFont }}
           >
             AGGIUNGI
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -102,23 +104,18 @@ function HomePage({
             </div>
           ))}
         </div>
-        <button
+        <Button
           onClick={handleCreateTournament}
-          className="btn-hover"
+          variant={selectedTeams.length === 8 ? 'success' : 'primary'}
+          fullWidth
           style={{
             marginTop: '25px',
-            width: '100%',
             padding: '15px',
-            backgroundColor: selectedTeams.length === 8 ? '#48bb78' : 'rgba(0,0,0,0.2)',
-            color: 'white',
-            border: 'none',
             borderRadius: '30px',
-            fontWeight: 'bold',
-            cursor: 'pointer'
           }}
         >
           GENERA TABELLONE
-        </button>
+        </Button>
       </div>
 
       <h4 style={{ marginTop: '30px', opacity: '0.7', fontSize: '0.9rem' }}>Storico Vincitori 🏆</h4>
@@ -138,7 +135,7 @@ function HomePage({
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   );
 }
 

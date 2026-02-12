@@ -1,6 +1,14 @@
+import Button from '../components/Button.jsx';
+import Card from '../components/Card.jsx';
+
 function LandingPage({ mainFont, onStart }) {
   return (
-    <div style={{ width: '90%', maxWidth: '450px', backgroundColor: 'rgba(255, 255, 255, 0.45)', padding: '36px 36px 32px', borderRadius: '40px', textAlign: 'center', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.3)', fontFamily: mainFont, margin: '10px 0' }}>
+    <Card
+      width="90%"
+      maxWidth="450px"
+      padding="36px 36px 32px"
+      style={{ borderRadius: '40px', textAlign: 'center', fontFamily: mainFont }}
+    >
       
       {/* LOGO */}
       <img src="/images/logo.png" alt="Logo" style={{ width: '180px', marginBottom: '10px', mixBlendMode: 'multiply' }} />
@@ -11,14 +19,13 @@ function LandingPage({ mainFont, onStart }) {
         Gestisci i risultati in tempo reale e osserva i vincitori avanzare verso la finale!
       </p>
 
-      <button 
+      <Button 
         onClick={onStart}
-        className="btn-hover" 
-        style={{ padding: '15px 50px', backgroundColor: '#1a365d', color: 'white', border: 'none', borderRadius: '40px', fontSize: '1.1rem', fontWeight: '900', cursor: 'pointer', fontFamily: mainFont }}
+        style={{ padding: '15px 50px', borderRadius: '40px', fontSize: '1.1rem', fontWeight: '900', fontFamily: mainFont }}
       >
         INIZIA
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }
 
